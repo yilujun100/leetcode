@@ -9,22 +9,27 @@
  */
 
 export default s => {
-	let lnum = 0;
-	let rnum = 0;
-	let len = s.length;
-	for (let i = 0; i < len; i++) {
+	const ss = [];
+	for (let i = 0, len = s.length; i < len; i++) {
 		switch (s[i]) {
 			case '(':
-				lnum++;
+			case '[':
+			case '{':
+				ss.push(s[i]);
 				break;
 			case ')':
-				rnum++;
+				if (!ss.length || ss[ss.length - 1] !== '(') return false;
+				ss.pop();
 				break;
-			default:
-				return false;
+			case ']':
+				if (!ss.length || ss[ss.length - 1] !== '[') return false;
+				ss.pop();
+				break;
+			case '}':
+				if (!ss.length || ss[ss.length - 1] !== '{') return false;
+				ss.pop();
+				break;
 		}
-		if (lnum >= rnum) continue; // 在任意一个位置上，左括号数量 >= 右括号数量
-		return false;
 	}
-	return lnum === rnum; // 在最后一个位置上，左括号数量 == 右括号数量
+	return ss.length === 0;
 };

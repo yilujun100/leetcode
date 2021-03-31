@@ -7,7 +7,7 @@ export default class MyCircularQueue {
 		this.items = new Array(k);
 		this.head = 0;
 		this.tail = 0;
-		this.max = k;
+		this.cnt = 0; // cnt记录队列的元素个数
 	}
 
 	// 向循环队列插入一个元素
@@ -16,7 +16,8 @@ export default class MyCircularQueue {
 			return false;
 		} else {
 			this.items[this.tail] = value;
-			this.tail = (this.tail + 1) % this.max;
+			this.tail = (this.tail + 1) % this.items.length;
+			this.cnt += 1;
 			return true;
 		}
 	}
@@ -24,9 +25,8 @@ export default class MyCircularQueue {
 	// 从循环队列中删除一个元素
 	deQueue() {
 		if (this.isEmpty()) return false;
-		let result = this.items[this.head];
-		this.items[this.head] = '';
-		this.head = (this.head + 1) % this.max;
+		this.head = (this.head + 1) % this.items.length;
+		this.cnt -= 1;
 		return true;
 	}
 
@@ -43,16 +43,16 @@ export default class MyCircularQueue {
 		if (this.isEmpty()) {
 			return -1;
 		}
-		return this.items[this.tail - 1 < 0 ? this.max - 1 : this.tail - 1];
+		return this.items[(this.tail - 1 + this.items.length) % this.items.length];
 	}
 
 	// 检查循环队列是否为空
 	isEmpty() {
-		return this.head === this.tail && !this.items[this.head];
+		return this.cnt === 0;
 	}
 
 	// 检查循环队列是否已满
 	isFull() {
-		return this.head === this.tail && !!this.items[this.head];
+		return this.cnt === this.items.length;
 	}
 }

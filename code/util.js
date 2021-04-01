@@ -95,3 +95,76 @@ export class BinaryTree {
 		return this.root;
 	}
 }
+
+// 声明链表节点
+export class ListNode {
+	constructor(val, next) {
+		this.val = val === undefined ? 0 : val;
+		this.next = next === undefined ? null : next;
+	}
+}
+
+// 声明链表的数据结构
+export class LinkedList {
+	constructor(arr) {
+		let head = new ListNode();
+		let p = head;
+		let node;
+		arr.forEach(item => {
+			node = new ListNode(item);
+			p.next = node;
+			p = node;
+		});
+		return head;
+	}
+}
+
+// 链表转数组
+export function list2array(head) {
+	if (!head) return [];
+	let result = [];
+	let p = head;
+
+	while (p) {
+		result.push(p.val);
+		p = p.next;
+	}
+	return result;
+}
+
+// Queue
+export class Queue {
+	constructor() {
+		this.items = [];
+		this.head = 0;
+		this.tail = 0;
+		this.cnt = 0;
+	}
+
+	enqueue(value) {
+		this.items[this.tail] = value;
+		this.tail += 1;
+		this.cnt += 1;
+	}
+
+	dequeue() {
+		if (this.isEmpty()) return undefined;
+		const result = this.items[this.head];
+		this.head += 1;
+		this.cnt += 1;
+		return result;
+	}
+
+	isEmpty() {
+		return this.cnt === 0;
+	}
+
+	peekFront() {
+		if (this.isEmpty()) return undefined;
+		return this.items[this.head];
+	}
+
+	size() {
+		return this.cnt;
+	}
+}

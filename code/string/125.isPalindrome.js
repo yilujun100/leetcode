@@ -9,8 +9,9 @@ export default s => {
 };
 
 const isPalindrome = s => {
-  s = s.toLowerCase().replace(/[^a-z0-9]/gi, '');
+  s = s.toLowerCase().replace(/[^a-z0-9]/gi, ''); // 1.filter out number &  char
   for (let i = 0, j = s.length - 1; i <= j; i++, j--) {
+    // 2.reverse and compare
     if (s.charAt(i) !== s.charAt(j)) return false;
   }
   return true;

@@ -26,15 +26,27 @@
 // 解法二：
 // 直接在内存中操作数组的index
 export default nums => {
-	let j = 0; // j用来记录非0元素的位置
-	for (let i = 0; i < nums.length; i++) {
-		if (nums[i] !== 0) {
-			nums[j] = nums[i];
-			if (i !== j) {
-				nums[i] = 0;
-			}
-			j++;
-		}
-	}
-	return nums;
+  let j = 0; // j用来记录非0元素的位置
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] !== 0) {
+      nums[j] = nums[i];
+      if (i !== j) {
+        nums[i] = 0;
+      }
+      j++;
+    }
+  }
+  return nums;
+};
+
+// solution3: 双指针
+const moveZeros = nums => {
+  let pointer = 0;
+  for (let i in nums) {
+    if (nums[i] !== 0) {
+      [nums[pointer], nums[i]] = [nums[i], nums[pointer]];
+      pointer++;
+    }
+  }
+  return nums;
 };

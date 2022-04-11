@@ -19,3 +19,19 @@ const levelOrder = root => {
   }
   return ans;
 };
+
+// solution2: DFS
+const levelOrder1 = root => {
+  const res = [];
+  const traverse = (node, level) => {
+    if (!node) return;
+    if (level >= res.length) {
+      res[level] = [];
+    }
+    res[level].push(node.val);
+    traverse(node.left, level + 1);
+    traverse(node.right, level + 1);
+  };
+  traverse(root, 0);
+  return res;
+};

@@ -13,8 +13,8 @@ const sumNumbers = root => {
       res += sum;
       return;
     }
-    node.left && dfs(node.left, sum);
-    node.right && dfs(node.right, sum);
+    dfs(node.left, sum);
+    dfs(node.right, sum);
   };
   dfs(root, 0);
   return res;

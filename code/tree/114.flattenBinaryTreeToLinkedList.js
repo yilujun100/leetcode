@@ -9,7 +9,7 @@
 // 完成后，可以继续向右移动 curr, 寻找下一个左子树。当 curr 不能再向右移动时，树将被成功拍平。
 const flatten = root => {
   let curr = root;
-  while (root) {
+  while (curr) {
     if (curr.left) {
       let runner = curr.left;
       while (runner.right) runner = runner.right;

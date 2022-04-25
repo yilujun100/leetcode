@@ -42,3 +42,8 @@ function levelOrder(node, d, level = []) {
   }
   return level;
 }
+
+function height(node) {
+  if (!node) return 0;
+  return Math.max(height(node.left), height(node.right)) + 1;
+}

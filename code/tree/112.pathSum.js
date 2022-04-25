@@ -10,6 +10,7 @@ const hasPathSum = (root, targetSum) => {
     // check leaf
     return targetSum === root.val;
   } else {
+    // continue DFS
     return hasPathSum(root.left, targetSum - root.val) || hasPathSum(root.right, targetSum - root.val);
   }
 };

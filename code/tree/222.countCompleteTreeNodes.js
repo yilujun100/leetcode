@@ -13,3 +13,18 @@ const countNodes = function (root) {
   dfs(root);
   return count;
 };
+
+// solution2: BFS
+const countNodes1 = function (root) {
+  if (!root) return 0;
+  let queue = [root];
+  let result = [];
+  while (queue.length) {
+    let curr = queue.shift();
+    result.push(curr.val);
+    if (curr.left) queue.push(curr.left);
+    if (curr.right) queue.push(curr.right);
+  }
+
+  return result.length;
+};

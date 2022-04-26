@@ -20,3 +20,19 @@ const kthSmallest = function (root, k) {
   inorderTraversal(root);
   return res;
 };
+
+// solution2: DFS
+const kthSmallest1 = function (root, k) {
+  let stack = [];
+  dfs(root);
+  return stack[k - 1];
+
+  function dfs(root) {
+    if (!root || stack.length > k) {
+      return null;
+    }
+    dfs(root.left);
+    stack.push(root.val);
+    dfs(root.right);
+  }
+};

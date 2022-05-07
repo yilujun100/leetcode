@@ -2,9 +2,7 @@
 // solution1: recursion
 const mirrorTree = function (root) {
   if (!root) return null;
-  const temp = root.left;
-  root.left = root.right;
-  root.right = temp;
+  [root.right, root.left] = [root.left, root.right];
   mirrorTree(root.left);
   mirrorTree(root.right);
   return root;

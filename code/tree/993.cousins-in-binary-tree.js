@@ -18,3 +18,43 @@ const isCousins = function (root, x, y) {
   let { depth: yDepth, parent: yParent } = getDepthAndParent(root, y);
   return xDepth === yDepth && xParent !== yParent;
 };
+
+// solution2: DFS
+const isCousins1 = (root, x, y) => {
+  const [xDepth, xParent] = findParentAndDepth(root, x);
+  const [yDepth, yParent] = findParentAndDepth(root, y);
+  return xDepth === yDepth && xParent !== yParent;
+};
+function findParentAndDepth(curNode, value, curDepth = 0, parentValue) {
+  if (!curNode) return;
+  if (curNode.val === value) return [curDepth, parentValue];
+  return (
+    findParentAndDepth(curNode.left, value, curDepth + 1, curNode.val) ||
+    findParentAndDepth(curNode.right, value, curDepth + 1, curNode.val)
+  );
+}
+
+// solution3: BFS
+const isCousins2 = function (root, x, y) {
+  const queue = [root];
+  while (queue.length) {
+    const size = queue.length;
+    let foundX = false;
+    let foundY = false;
+    for (let i = 0; i < size; i++) {
+      const node = queue.shift();
+      // check if children are x and y
+      if (node.left && node.right) {
+        if ((node.left.val === x && node.right.val === y) || (node.left.val === y && node.right.val === x))
+          return false;
+      }
+      // find x and y at the same level
+      if (node.val === x) foundX = true;
+      if (node.val === y) foundY = true;
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    if (foundX && foundY) return true;
+  }
+  return false;
+};

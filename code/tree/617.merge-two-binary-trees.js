@@ -10,10 +10,19 @@
 // 对一个节点进行合并之后，还要对该节点的左右子树分别进行合并，用递归实现即可。
 const mergeTrees = function (root1, root2) {
   if (!root1 && !root2) return null;
-  if (!root1) return root2;
-  if (!root2) return root1;
+  if (!root1 || !root2) return root1 || root2;
   root1.val += root2.val;
   root1.left = mergeTrees(root1.left, root2.left);
   root1.right = mergeTrees(root1.right, root2.right);
   return root1;
+};
+
+const mergeTrees1 = function (t1, t2) {
+  if (t1 && t2) {
+    const newNode = new TreeNode(t1.val + t2.val);
+    newNode.left = mergeTrees1(t1.left, t2.left);
+    newNode.right = mergeTrees1(t1.right, t2.right);
+    return newNode;
+  }
+  return t1 || t2;
 };

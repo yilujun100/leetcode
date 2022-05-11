@@ -17,3 +17,8 @@ function isSameTree(p, q) {
   if (!p || !q || p.val !== q.val) return false;
   return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
 }
+
+// solution2
+const isSubtree1 = function (s, t) {
+  return JSON.stringify(s).indexOf(JSON.stringify(t)) !== -1;
+};

@@ -20,3 +20,8 @@ const isUnivalTree1 = function (root) {
 
   return true;
 };
+
+const isUnivalTree2 = function (root, val = root.val) {
+  if (!root) return true;
+  return root.val === val && isUnivalTree2(root.left, val) && isUnivalTree2(root.right, val);
+};

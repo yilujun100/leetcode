@@ -2,6 +2,10 @@
 const sumRootToLeaf = function (root) {
   const binaries = [];
   DFSTraverse(root, '');
+  return binaries.reduce((sum, binary) => {
+    sum += parseInt(binary, 2);
+    return sum;
+  }, 0);
   function DFSTraverse(node, str) {
     if (!node) return;
     const binary = `${str}${node.val}`;
@@ -9,9 +13,4 @@ const sumRootToLeaf = function (root) {
     DFSTraverse(node.left, binary);
     DFSTraverse(node.right, binary);
   }
-
-  return binaries.reduce((sum, binary) => {
-    sum += parseInt(binary, 2);
-    return sum;
-  }, 0);
 };

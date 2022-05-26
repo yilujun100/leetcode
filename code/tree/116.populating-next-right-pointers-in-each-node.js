@@ -17,3 +17,10 @@ const connect = function (root) {
   }
   return root;
 };
+
+// solution2: recursion
+const connect1 = function (root) {
+  dfs(root, null);
+  return root;
+};
+function dfs(curr, next) {}

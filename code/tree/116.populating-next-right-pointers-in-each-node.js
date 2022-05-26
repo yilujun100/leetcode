@@ -23,4 +23,9 @@ const connect1 = function (root) {
   dfs(root, null);
   return root;
 };
-function dfs(curr, next) {}
+function dfs(curr, next) {
+  if (!curr) return;
+  curr.next = next;
+  dfs(curr.left, curr.right);
+  dfs(curr.right, curr.next == null ? null : curr.next.left);
+}

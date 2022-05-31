@@ -18,3 +18,19 @@ const rob = function (root) {
 
   return Math.max(...helper(root));
 };
+
+const rob1 = function (root) {
+  return Math.max(...robSub(root));
+};
+function robSub(root) {
+  if (!root) return [0, 0];
+
+  let left = robSub(root.left);
+  let right = robSub(root.right);
+  const res = [];
+
+  res[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+  res[1] = root.val + left[0] + right[0];
+
+  return res;
+}

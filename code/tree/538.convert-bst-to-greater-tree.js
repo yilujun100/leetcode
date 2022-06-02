@@ -7,14 +7,14 @@
 // 此题同第 1038 题。
 const convertBST = function (root) {
   let sum = 0;
-  traversalHelper(root);
+  traverse(root);
   return root;
 
-  function traversalHelper(node) {
+  function traverse(node) {
     if (!node) return;
-    traversalHelper(node.right);
+    traverse(node.right);
     node.val += sum;
     sum = node.val;
-    traversalHelper(node.left);
+    traverse(node.left);
   }
 };

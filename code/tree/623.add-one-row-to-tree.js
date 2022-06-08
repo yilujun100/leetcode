@@ -30,7 +30,20 @@ const addOneRow = function (root, val, depth) {
     level--;
   }
 };
-addOneRow(
+
+// solution2
+const addOneRow1 = function (root, v, d) {
+  if (d === 1) return new TreeNode(v, root, null);
+  if (d === 2) {
+    root.left = new TreeNode(v, root.left, null);
+    root.right = new TreeNode(v, null, root.right);
+  } else {
+    if (root.left) addOneRow1(root.left, v, d - 1);
+    if (root.right) addOneRow1(root.right, v, d - 1);
+  }
+  return root;
+};
+addOneRow1(
   {
     val: 1,
     left: {

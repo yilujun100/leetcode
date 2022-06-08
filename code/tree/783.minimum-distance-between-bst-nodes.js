@@ -15,8 +15,8 @@ const minDiffInBST = function (root) {
 
 function inOrder(root, out = []) {
   if (!root) return;
-  inOrder(root.left);
+  inOrder(root.left, out);
   out.push(root.val);
-  inOrder(root.right);
+  inOrder(root.right, out);
   return out;
 }

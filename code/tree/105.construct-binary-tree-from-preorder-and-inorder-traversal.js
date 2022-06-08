@@ -6,9 +6,21 @@
 // 利用递归思想，从 preorder 可以得到根节点，从 inorder 中得到左子树和右子树。只剩下一个节点的时候即为根节点。
 // 不断的递归直到所有的树都生成完成。
 const buildTree = function (preorder, inorder) {
-  const rootIndex = 0;
-  const rootValue = preOrder[rootIndex];
-  const pos = inorder.findIndex(value => value === rootValue);
-  const root = new TreeNode(rootValue);
-  root.left = buildTree();
+  const map = new Map();
+  for (let i = 0; i < inorder.length; i++) {
+    map.set(inorder[i], i);
+  }
+  return splitTree(preorder, map, 0, 0, inorder.length - 1);
 };
+function splitTree(P, M, pix, start, end) {
+  let rootVal = P[pix],
+    root = new TreeNode(rootVal),
+    iMid = M.get(rootVal);
+  if (iMid > start) {
+    root.left = splitTree(P, M, pix + 1, start, iMid - 1);
+  }
+  if (iMid < end) {
+    root.right = splitTree(P, M, pix + iMid - start + 1, iMid + 1, end);
+  }
+  return root;
+}

@@ -30,3 +30,31 @@ const widthOfBinaryTree = function (root) {
 
   return maxWidth;
 };
+
+const root = {
+  val: 1,
+  left: {
+    val: 3,
+    left: {
+      val: 5,
+      left: null,
+      right: null
+    },
+    right: {
+      val: 3,
+      left: null,
+      right: null
+    }
+  },
+  right: {
+    val: 2,
+    left: null,
+    right: {
+      val: 9,
+      left: null,
+      right: null
+    }
+  }
+};
+
+widthOfBinaryTree(root);

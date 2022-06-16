@@ -11,3 +11,12 @@ function containsOne(node) {
   if (!a2) node.right = null;
   return node.val === 1 || a1 || a2;
 }
+
+// solution2
+const pruneTree1 = function (root) {
+  if (!root) return null;
+  root.left = pruneTree1(root.left);
+  root.right = pruneTree2(root.right);
+  if (node.val === 1 || root.left || root.right) return root;
+  return null;
+};
